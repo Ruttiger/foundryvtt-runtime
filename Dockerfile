@@ -10,15 +10,15 @@ RUN apt-get update \
         curl \
         unzip \
         tini \
+        gosu \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /opt/foundry/app /data \
     && chown -R node:node /opt/foundry /data
 
-COPY --chown=node:node entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-USER node
 WORKDIR /opt/foundry/app
 
 EXPOSE 30000
