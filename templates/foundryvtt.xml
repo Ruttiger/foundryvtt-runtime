@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>foundryvtt</Name>
+  <Repository>ruttiger/foundryvtt-runtime:14</Repository>
+  <Network>bridge</Network>
+
+  <Config Name="WebUI Port"
+          Target="30000"
+          Default="30000"
+          Mode="tcp"
+          Type="Port" />
+
+  <Config Name="Foundry App"
+          Target="/opt/foundry/app"
+          Default="/mnt/user/appdata/foundry-14/app"
+          Mode="rw"
+          Type="Path" />
+
+  <Config Name="Foundry Data"
+          Target="/data"
+          Default="/mnt/user/appdata/foundry-14/data"
+          Mode="rw"
+          Type="Path" />
+
+  <WebUI>http://[IP]:[PORT:30000]</WebUI>
+</Container>
