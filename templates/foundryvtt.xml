@@ -2,25 +2,67 @@
 <Container version="2">
   <Name>foundryvtt</Name>
   <Repository>ruttiger/foundryvtt-runtime:14</Repository>
+  <Registry>https://hub.docker.com/r/ruttiger/foundryvtt-runtime</Registry>
   <Network>bridge</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Ruttiger/foundryvtt-runtime</Support>
+  <Project>https://foundryvtt.com/</Project>
+  <Overview>
+    Lightweight Foundry VTT runtime for Docker/Unraid. This image does not include Foundry VTT. On first start, provide FOUNDRY_RELEASE_URL to install Foundry into the app volume.
+  </Overview>
+  <Category>GameServers:</Category>
+  <WebUI>http://[IP]:[PORT:30000]</WebUI>
+  <Icon>https://foundryvtt.com/static/assets/icons/fvtt.png</Icon>
 
   <Config Name="WebUI Port"
           Target="30000"
           Default="30000"
           Mode="tcp"
-          Type="Port" />
+          Description="Foundry VTT web port."
+          Type="Port"
+          Display="always"
+          Required="true"
+          Mask="false">30000</Config>
 
   <Config Name="Foundry App"
           Target="/opt/foundry/app"
           Default="/mnt/user/appdata/foundry-14/app"
           Mode="rw"
-          Type="Path" />
+          Description="Foundry application files. This volume must be writable so Foundry can update itself from the UI."
+          Type="Path"
+          Display="always"
+          Required="true"
+          Mask="false">/mnt/user/appdata/foundry-14/app</Config>
 
   <Config Name="Foundry Data"
           Target="/data"
           Default="/mnt/user/appdata/foundry-14/data"
           Mode="rw"
-          Type="Path" />
+          Description="Foundry user data: worlds, systems, modules, assets and configuration."
+          Type="Path"
+          Display="always"
+          Required="true"
+          Mask="false">/mnt/user/appdata/foundry-14/data</Config>
 
-  <WebUI>http://[IP]:[PORT:30000]</WebUI>
+  <Config Name="Foundry Release URL"
+          Target="FOUNDRY_RELEASE_URL"
+          Default=""
+          Mode=""
+          Description="Temporary Foundry VTT Node.js download URL. Required only for first install when the app volume is empty. Remove it after installation."
+          Type="Variable"
+          Display="always"
+          Required="false"
+          Mask="true"></Config>
+
+  <Config Name="Foundry Port"
+          Target="FOUNDRY_PORT"
+          Default="30000"
+          Mode=""
+          Description="Internal Foundry port."
+          Type="Variable"
+          Display="advanced"
+          Required="true"
+          Mask="false">30000</Config>
 </Container>
